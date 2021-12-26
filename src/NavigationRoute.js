@@ -1,21 +1,16 @@
 import * as React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, TouchableOpacity, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import ContactScreen from './screen/ContactScreen';
+import DetailsScreen from './screen/DetailsScreen';
+
 function Contact({navigation, route}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
+  return <ContactScreen navigation={navigation} route={route} />;
 }
 function Details({navigation, route}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details screen</Text>
-    </View>
-  );
+  return <DetailsScreen navigation={navigation} route={route} />;
 }
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +23,23 @@ function App() {
           name="Home"
           component={Contact}
           options={{
-            title: 'Overview',
+            title: 'Contacts',
+            headerLeft: () => (
+              <TouchableOpacity>
+                <Image
+                  source={require('../src/assets/icon/search.png')}
+                  style={{width: 20, height: 20}}
+                />
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity>
+                <Image
+                  source={require('../src/assets/icon/plus.png')}
+                  style={{width: 20, height: 20}}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
         <Stack.Screen
